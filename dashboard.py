@@ -59,13 +59,22 @@ ring_type_options = {
 selected_ring_type = st.sidebar.selectbox("Ring Type", options=list(ring_type_options.keys()), format_func=lambda x: x.capitalize())
 
 # Demonstration of Selected Options (Example)
-st.write("### Selected Mushroom Characteristics")
-st.write(f"Cap Diameter: {cap_diameter} cm, Stem Height: {stem_height} cm, Stem Width: {stem_width} mm")
-st.write(f"Habitat X Season: {habitat_season_options[selected_habitat_season]}")
-st.write(f"Cap Shape: {selected_cap_shape}, Cap Color: {cap_color_options[selected_cap_color]}")
-st.write(f"Does Bruise or Bleed: {bruise_bleed_options[selected_bruise_bleed]}")
-st.write(f"Gill Attachment: {selected_gill_attachment}, Gill Color: {cap_color_options[selected_gill_color]}")
-st.write(f"Stem Color: {cap_color_options[selected_stem_color]}, Ring Type: {selected_ring_type}")
+st.write("# Mushroom Edibility Recognition")
+st.write("## How to use this app")
+st.write("* Enter the mushroom's characteristics in the sidebar. The model will predict if it's edible or poisonous with an accuracy rating of 99.8% after tuning the model.")
+st.write("* Simply press the predict button after entering all the values.")
+st.write("### Guidelines for selecting options")
+st.write("#### 1. Cap Diameter")
+st.image("Assets/cap-diameter.png", caption="Example of Cap Diameter", use_column_width=True)
+st.write("* Add X and Y then divide by 2 to get the diameter.")
+st.write("#### 2. Stem Height")
+st.image("Assets/stem-height.webp", caption="Example of Stem Height", use_column_width=True)
+st.write("* Measure the height of the stem from the base to the cap.")
+st.write("#### 3. Stem Width")
+st.image("Assets/stem-width.webp", caption="Example of Stem Width", use_column_width=True)
+st.write("* Measure the width of the stem at the base.")
+
+
 
 # Assuming the setup code is as provided earlier
 
@@ -109,8 +118,8 @@ for ring, abbreviation in ring_type_options.items():
     model_input[f"ring_type_{abbreviation}"] = (ring == selected_ring_type)
 
 # Display the constructed model_input object for verification
-st.write("Model Input:")
-st.json(model_input)
+# st.write("Model Input:")
+# st.json(model_input)
 
 import numpy as np
 import pandas as pd
@@ -130,7 +139,7 @@ def load_models():
 rf_model, pca_model = load_models()
 
 # Predict button in the sidebar
-if st.sidebar.button('Predict'):
+if st.sidebar.button('Predict', use_container_width=True):
     # Convert model_input to DataFrame for PCA transformation
     input_df = pd.DataFrame([model_input])
 
@@ -168,4 +177,8 @@ if st.sidebar.button('Predict'):
 
     # Display the prediction
     prediction_label = 'Edible' if prediction[0] == 0 else 'Poisonous'  # Update based on your model's labeling
-    st.sidebar.write(f'Prediction: {prediction_label}')
+
+    # Create a colored box to show the prediction
+    color = 'green' if prediction[0] == 0 else 'red'  # Update based on your model's labeling
+    st.sidebar.markdown(f'Result: <span style="color: {color}; font-size: large;"><b>{prediction_label}</b></span>', unsafe_allow_html=True)
+
