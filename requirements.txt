@@ -1,0 +1,4 @@
+joblib
+numpy
+pandas
+streamlit==1.32.2

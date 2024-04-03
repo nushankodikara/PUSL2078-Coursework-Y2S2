@@ -1,3 +1,6 @@
+from joblib import load
+import numpy as np
+import pandas as pd
 import streamlit as st
 
 # Sidebar for numerical inputs
@@ -146,11 +149,6 @@ for ring, abbreviation in ring_type_options.items():
 # Display the constructed model_input object for verification
 # st.write("Model Input:")
 # st.json(model_input)
-
-import numpy as np
-import pandas as pd
-from joblib import load
-
 
 # Assuming the previous setup and model_input construction
 
