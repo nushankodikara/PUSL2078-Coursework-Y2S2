@@ -1,5 +1,7 @@
 joblib
 numpy
 pandas
+scikit-image
 scikit-learn
+scipy
 streamlit==1.32.2
