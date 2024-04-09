@@ -103,10 +103,6 @@ st.write("* Select the type of ring on the stem.")
 st.write("### Note")
 st.write("The model is based on the Secondary Mushroom Dataset from UCI Machine Learning Repository. The model has 43,000 instances and the trained model got an accuracy of 99.8% and The model is a Random Forest Classifier.")
 
-
-
-# Assuming the setup code is as provided earlier
-
 # Initialize an object (dictionary) for model input
 model_input = {
     "cap-diameter": cap_diameter,
